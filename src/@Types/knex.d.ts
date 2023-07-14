@@ -18,7 +18,8 @@ declare module 'knex/types/tables' {
       user_id: UUID;
       name: string;
       description: string;
-      date_time: Date;
+      created_at: Date;
+      updated_at: Date;
       in_diet: boolean;
     };
   }
