@@ -5,8 +5,8 @@ export async function up(knex: Knex): Promise<void> {
     table.uuid('id').primary();
     table.string('username').unique().notNullable();
     table.string('email').unique().notNullable().index();
-    table.integer('count_meals');
-    table.integer('count_meals_in_diet');
+    table.integer('count_meals').defaultTo(0);
+    table.integer('count_meals_in_diet').defaultTo(0);
     table.string('session_id');
   });
 }
