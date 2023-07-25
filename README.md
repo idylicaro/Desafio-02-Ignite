@@ -3,12 +3,12 @@
 ## Requisito funcional
 
 - [x] Deve ser possível criar um usuário
-- [ ] Deve ser possível identificar o usuário entre as requisições
-- [ ] Deve ser possível registrar uma refeição feita, com as seguintes informações:
-  - [ ] Nome
-  - [ ] Descrição
-  - [ ] Data e Hora
-  - [ ] Está dentro ou não da dieta
+- [x] Deve ser possível identificar o usuário entre as requisições (usar a session_id do cookie para relacionar o user_id a meal)
+- [x] Deve ser possível registrar uma refeição feita, com as seguintes informações:
+  - [x] Nome
+  - [x] Descrição
+  - [x] Data e Hora
+  - [x] Está dentro ou não da dieta
 - [ ] Deve ser possível editar uma refeição, podendo alterar todos os dados acima
 - [ ] Deve ser possível apagar uma refeição
 - [ ] Deve ser possível listar todas as refeições de um usuário
@@ -22,4 +22,4 @@
 
 ## Regras de negocio
 
-- [ ] _As refeições devem ser relacionadas a um usuário._
+- [x] _As refeições devem ser relacionadas a um usuário._
