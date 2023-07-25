@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify';
 import { knex } from '../database';
 import * as z from 'zod';
 import { randomUUID } from 'crypto';
-import { User } from '../models/users';
+import { checkSessionIdExists } from '../middlewares/check-session-id-exists';
 
 export async function mealsRoutes(app: FastifyInstance) {
   //zod to validate the body
@@ -14,25 +14,31 @@ export async function mealsRoutes(app: FastifyInstance) {
     })
     .required();
 
-  app.post('/', {}, async (request, reply) => {
-    // TODO: add pre handler to validate the session id cookie
-    const { body } = request;
+  app.post(
+    '/',
+    {
+      preHandler: [checkSessionIdExists]
+    },
+    async (request, reply) => {
+      // TODO: add pre handler to validate the session id cookie
+      const { body } = request;
 
-    const validatedBody = bodySchema.parse(body);
+      const validatedBody = bodySchema.parse(body);
 
-    let { session_id } = request.cookies;
+      let { session_id } = request.cookies;
 
-    const [user] = await knex('users').select('id').where({ session_id });
+      const [user] = await knex('users').select('id').where({ session_id });
 
-    const currentTime = new Date();
-    const meal = await knex('meals').insert({
-      id: randomUUID(),
-      user_id: user.id,
-      created_at: currentTime,
-      updated_at: currentTime,
-      ...validatedBody
-    });
+      const currentTime = new Date();
+      const meal = await knex('meals').insert({
+        id: randomUUID(),
+        user_id: user.id,
+        created_at: currentTime,
+        updated_at: currentTime,
+        ...validatedBody
+      });
 
-    return reply.status(201).send();
-  });
+      return reply.status(201).send();
+    }
+  );
 }
