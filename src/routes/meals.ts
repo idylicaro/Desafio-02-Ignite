@@ -20,7 +20,6 @@ export async function mealsRoutes(app: FastifyInstance) {
       preHandler: [checkSessionIdExists]
     },
     async (request, reply) => {
-      // TODO: add pre handler to validate the session id cookie
       const { body } = request;
 
       const validatedBody = bodySchema.parse(body);

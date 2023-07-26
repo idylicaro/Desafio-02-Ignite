@@ -7,7 +7,6 @@ import { mealsRoutes } from './routes/meals';
 export const app = fastify();
 app.register(cookie);
 
-// TODO: use the cookie midllewere
 app.register(usersRoutes, {
   prefix: 'users'
 });
